@@ -3,23 +3,23 @@
 <html lang="ja">
 
 	<head>
-		<meta http-equiv="content-type" content="text/html;charset=shift_jis">
+		<meta http-equiv="content-type" content="text/html;charset=UTF-8">
 		<meta name="generator" content="Adobe GoLive">
-		<title>�C���X�g���[�V�����K�C�h</title>
+		<title>インストレーションガイド</title>
 		<link href="common.css" rel="stylesheet" type="text/css" media="all">
 	</head>
 
 	<body class="ruby">
-		<h1>�C���X�g���[�V�����K�C�h</h1>
-		<p>Ruby for OpenVMS�̃C���X�g�[�����@�ł��B</p>
-		<h2>�C���X�g�[���̏���</h2>
-		<p>OS�̃o�[�W�������m�F���Ă��������B���ݓ�����m�F�ł��Ă���̂́COpenVMS Alpha V7.3-1�ȍ~�ł��B���{��OpenVMS�̓C���X�g�[������Ă��Ȃ��Ă����܂��܂���BOS�̃o�[�W�����͈ȉ��̕��@�Ŋm�F�ł��܂��B(�������L�[�{�[�h����̓��͂ł�)</p>
+		<h1>インストレーションガイド</h1>
+		<p>Ruby for OpenVMSのインストール方法です。</p>
+		<h2>インストールの準備</h2>
+		<p>OSのバージョンを確認してください。現在動作を確認できているのは，OpenVMS Alpha V7.3-1以降です。日本語OpenVMSはインストールされていなくてもかまいません。OSのバージョンは以下の方法で確認できます。(太字がキーボードからの入力です)</p>
 		<pre class="code_example">$ <b>SHOW SYSTEM/NOPROCESS</b>
 OpenVMS V7.3-1  on node HATENA   6-AUG-2004 15:23:46.58  Uptime  21 21:54:13
 </pre>
-		<p>�C���X�g���[�V�����L�b�g(<a href="kit/rubyvms_x181x014.zip">ruby-vms-x181x014.zip</a>)���_�E�����[�h���Ă��������Bzip�ň��k����Ă��܂��̂ŁCunzip���Ă��������Bunzip�����PCSI�L�b�g�CDLS-AXPVMS-RUBY-X0108-1X014-1.PCSI������܂��B</p>
-		<p>ODS-5�{�����[���̏�ł̓t�@�C�������������ɂȂ��Ă���ꍇ������܂��B���̂Ƃ��͑啶���̃t�@�C������rename���Ă��������B</p>
-		<p>OpenVMS�p��unzip�́C<a href="http://h50146.www5.hp.com/products/software/oe/openvms/software/freeware/index.html">OpenVMS�t���[�E�G�A�̃y�[�W</a>�������ł��܂��B�܂��COpenVMS Freeware CD�ɂ����^����Ă��܂��B</p>
+		<p>インストレーションキット(<a href="kit/rubyvms_x181x014.zip">ruby-vms-x181x014.zip</a>)をダウンロードしてください。zipで圧縮されていますので，unzipしてください。unzipするとPCSIキット，DLS-AXPVMS-RUBY-X0108-1X014-1.PCSIが現れます。</p>
+		<p>ODS-5ボリュームの上ではファイル名が小文字になっている場合があります。このときは大文字のファイル名にrenameしてください。</p>
+		<p>OpenVMS用のunzipは，<a href="http://h50146.www5.hp.com/products/software/oe/openvms/software/freeware/index.html">OpenVMSフリーウエアのページ</a>から入手できます。また，OpenVMS Freeware CDにも収録されています。</p>
 		<pre class="code_example">$<b> UNZIP :== $<i>dev:[dir]</i>UNZIP.EXE&quot;
 </b>
 $ <b>UNZIP &quot;-V&quot; rubyvms_x181x014.zip</b>
@@ -35,8 +35,8 @@ DLS-AXPVMS-RUBY-X0108-1X014-1.PCSI;1
 
 Total of 1 file, 8240 blocks.
 </pre>
-		<h2>�C���X�g�[���̎��s</h2>
-		<p>PRODUCT INSTALL�R�}���h�ŊȒP�ɃC���X�g�[���ł��܂��B(�����̕������L�[�{�[�h����̓��͂ł�)</p>
+		<h2>インストールの実行</h2>
+		<p>PRODUCT INSTALLコマンドで簡単にインストールできます。(太字の部分がキーボードからの入力です)</p>
 		<pre class="code_example">$ <b>PRODUCT INSTALL */SOURCE=<i>dev:[dir]</i></b>
 
 The following product has been selected:
@@ -63,16 +63,16 @@ Portion done: 0%...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
 The following product has been installed:
     DLS AXPVMS RUBY X1.8-1X014              Layered Product
 </pre>
-		<h2>�C���X�g�[����̍��</h2>
-		<p>�K�v�Ș_�����Ȃǂ̐ݒ肪SYS$STARTUP:RUBY_STARTUP.COM�ɓ����Ă��܂��̂ł�������s���Ă��������B���݂̃o�[�W�����ł̓C���X�g���[�V������Ɏ����ł͎��s����܂���B</p>
-		<p>�܂��CRUBY�R�}���h���o�^����܂��̂ŁC�R�}���h�e�[�u��(DCLTABLES.EXE�j��SET COMMAND�R�}���h�ōēx�ǂݍ���ł��������B</p>
+		<h2>インストール後の作業</h2>
+		<p>必要な論理名などの設定がSYS$STARTUP:RUBY_STARTUP.COMに入っていますのでこれを実行してください。現在のバージョンではインストレーション後に自動では実行されません。</p>
+		<p>また，RUBYコマンドが登録されますので，コマンドテーブル(DCLTABLES.EXE）をSET COMMANDコマンドで再度読み込んでください。</p>
 		<pre class="code_example">$ <b>@SYS$STARTUP:RUBY_STARTUP.COM</b>
 
 $ <b>SET COMMAND/TABLE=SYS$SHARE:DCLTABLES.EXE
 </b></pre>
-		<p>�܂��CSYS$STARTUP:SYSTARTUP_VMS.COM��ҏW���āC�N�����ɂ��̃R�}���h�v���V�[�W�������s�����悤�ɐݒ肵�Ă��������B</p>
-		<h2>������Ǝg���Ă݂�</h2>
-		<p>�������C���X�g�[�����ꂽ���ǂ����͎��̃R�}���h�Ŋm�F�ł��܂��B</p>
+		<p>また，SYS$STARTUP:SYSTARTUP_VMS.COMを編集して，起動時にこのコマンドプロシージャが実行されるように設定してください。</p>
+		<h2>ちょっと使ってみる</h2>
+		<p>正しくインストールされたかどうかは次のコマンドで確認できます。</p>
 		<pre class="code_example">$<b> ruby -v</b>
 ruby 1.8.1 (2003-12-25) [alpha-vms]
 
