@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="ja">
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=shift_jis">
+		<meta name="generator" content="Adobe GoLive">
+		<title>Ruby for OpenVMS リリースノート</title>
+		<link href="common.css" rel="stylesheet" type="text/css" media="all">
+	</head>
+
+	<body class="ruby">
+		<h1>Ruby for OpenVMS リリースノート</h1>
+		<h2>対応するRubyのバージョン</h2>
+		<p>Ruby for OpenVMS Alpha X1.8-1X014は，Ruby 1.8.1 2003年12月25日版のソースを元にビルドされています。</p>
+		<h2>付属するライブラリ</h2>
+		<h3>Rubyで書かれたライブラリ</h3>
+		<p>Ruby 1.8.1標準添付されているライブラリのうち，Rubyで書かれたライブラリについてはすべて収録されています。ただしテストされているわけではありません。</p>
+		<h3>拡張ライブラリ</h3>
+		<p>Ruby 1.8.1に標準添付されている拡張ライブラリのうち，socketのみがキットに収録されています。内部でsocketを呼び出しているライブラリ（たとえば，net/http)も使用可能です。</p>
+		<p>socket以外のライブラリは将来のリリースで順次添付していく予定です。</p>
+		<h2>インストールされるファイルの配置</h2>
+		<p>標準のインストール位置はSYS$COMMON:[RUBY]以下です。</p>
+		<table class="r">
+			<tr>
+				<td>[RUBY]</td>
+				<td>Rubyインタプリタが置かれます。</td>
+			</tr>
+			<tr>
+				<td>[RUBY.LIB]</td>
+				<td>ライブラリが配置されます。論理名RUBY_LIBROOTがここを指しています。</td>
+			</tr>
+			<tr>
+				<td>[RUBY.SRC]</td>
+				<td>拡張ライブラリの作成に必要なファイルが置かれます。現在はruby.hのみが提供されています。</td>
+			</tr>
+		</table>
+		<h2>requireが読み込むファイルの位置</h2>
+		<p>requireが読み込むファイルや起動する拡張ライブラリの位置はグローバル変数 $: に保持されています。論理名 RUBY_LIBROOTが指しているディレクトリからの相対位置として定義されています。このほか，論理名 RUBYLIB によって指定されたディレクトリを探索対象に含めることができます。</p>
+		<p>詳細は，グローバル変数 $: の値を見てください。(ruby -e &quot;puts $:&quot;)</p>
+		<pre class="code_example">$ <b>ruby -e &quot;puts $:&quot;
+</b>/RUBY_LIBROOT/site_ruby/018
+/RUBY_LIBROOT/site_ruby/018/alpha-vms
+/RUBY_LIBROOT/site_ruby
+/RUBY_LIBROOT/018
+/RUBY_LIBROOT/018/alpha-vms		</pre>
+		<h2>そのほかのファイル</h2>
+		<h3>RUBY_STARTUP.COM</h3>
+		<p>Rubyの実行に必要な論理名を設定します。SYS$STARTUPに置かれます。システムマネージャは，システムの起動時にこのコマンドプロシージャが実行されるよう，SYS$STARTUP:SYSTARTUP_VMS.COMを書き換えておく必要があります。</p>
+		<h2>論理名</h2>
+		<p>Ruby for OpenVMSは次の論理名を使用します。(*印がついているものは，RUBY_STARTUP.COMで定義されるものです。)</p>
+		<table class="r">
+			<tr>
+				<th>論理名</th>
+				<th>等価名 (初期値)</th>
+				<th>備考</th>
+			</tr>
+			<tr>
+				<td>RUBY_ROOT</td>
+				<td>SYS$COMMON:[RUBY]</td>
+				<td>*</td>
+			</tr>
+			<tr>
+				<td>RUBY</td>
+				<td>RUBY_ROOT:RUBY.EXE</td>
+				<td>*</td>
+			</tr>
+			<tr>
+				<td>RUBYSHR</td>
+				<td>RUBY_ROOT:RUBYSHR.EXE</td>
+				<td>*</td>
+			</tr>
+			<tr>
+				<td>RUBY_LIBROOT</td>
+				<td>RUBY_ROOT:[LIB]</td>
+				<td>*</td>
+			</tr>
+			<tr>
+				<td>RUBYLIB</td>
+				<td>なし</td>
+				<td>requireが探索するディレクトリを設定する。UNIX形式のディレクトリ表記で書くこと。</td>
+			</tr>
+		</table>
+		<h2>既知の問題点と制限事項</h2>
+		<p>TBD (いろいろあります)</p>
+		<h2>拡張ライブラリの作成方法</h2>
+		<p>TBD</p>
+		<p>ruby.hを使ってコンパイルして，RUBYSHR.EXEとリンクするような感じです。拡張ライブラリ側のエントリポイントを知らせるためのoption fileを記述する必要があります。(そのうちもっと詳しく書きます。)</p>
+	</body>
+
+</html>
